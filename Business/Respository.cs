@@ -71,7 +71,6 @@ namespace rep
         }
 
         public string[] DecodeJwtToken(string token){
-            var stream = token;
             var handler = new JwtSecurityTokenHandler();
             var tokenS = handler.ReadJwtToken(token);
 
