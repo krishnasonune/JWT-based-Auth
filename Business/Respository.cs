@@ -69,5 +69,17 @@ namespace rep
 
             return new List<Movies>{m1, m2, m3};
         }
+
+        public string[] DecodeJwtToken(string token){
+            var stream = token;
+            var handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadJwtToken(token);
+
+            var name = tokenS.Claims.First(x => x.Type == ClaimTypes.Name).Value;
+            var email = tokenS.Claims.First(x => x.Type == ClaimTypes.Email).Value;
+            var Iat = tokenS.Claims.First(x => x.Type == JwtRegisteredClaimNames.Iat).Value;
+            var subject = tokenS.Claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value;
+            return new string[]{name, email, Iat, subject};
+        }
     }
 }

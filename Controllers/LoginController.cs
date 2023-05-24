@@ -5,7 +5,7 @@ using Models;
 namespace Login.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class LoginController : ControllerBase
 {
     Repository repo;
@@ -21,5 +21,10 @@ public class LoginController : ControllerBase
             return Ok(repo.GenerateToken(user));
         }
         return Unauthorized("user not authorised");
+    }
+
+    [HttpGet]
+    public IActionResult GetDetailsFromDecoded_Json_Web_Token(string token){
+        return Ok(repo.DecodeJwtToken(token));
     }
 }
